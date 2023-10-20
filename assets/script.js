@@ -18,33 +18,33 @@ const slides = [
   },
 ]
 
-//*********Navigation***********//
 const nbSlide = slides.length
 const goBackbtn = document.querySelector('.goback-btn')
 const goNextbtn = document.querySelector('.gonext-btn')
+let image = document.querySelector('.banner-img')
+let bulletPoint = document.querySelectorAll('.dot')
 let current = 0
 
 function slideNext() {
-  slides[current].classList.remove('active')
   if (current < nbSlide - 1) {
     current++
   } else {
-    count = 0
+    current = 0
   }
-  slides[current].classList.add('active')
+  let changeImage = slides[current]
+  image.setAttribute('src', 'assets/images/slideshow/' + changeImage.image)
 }
 
 goNextbtn.addEventListener('click', slideNext)
 
 function slideBack() {
-  slide[count].classList.remove('active')
-  if (count > 0) {
-    count--
+  if (current > 0) {
+    current--
   } else {
-    count = nbSlide - 1
+    current = nbSlide - 1
   }
-  slide[count].classList.add('active')
-  console.log(count)
+  let changeImage = slides[current]
+  image.setAttribute('src', 'assets/images/slideshow/' + changeImage.image)
 }
 
 goBackbtn.addEventListener('click', slideBack)
