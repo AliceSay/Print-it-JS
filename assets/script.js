@@ -22,29 +22,41 @@ const nbSlide = slides.length
 const goBackbtn = document.querySelector('.goback-btn')
 const goNextbtn = document.querySelector('.gonext-btn')
 let image = document.querySelector('.banner-img')
-let bulletPoint = document.querySelectorAll('.dot')
+let bulletPoints = document.querySelectorAll('.dot')
+let imageText = document.querySelector('p') // Texte à changer
 let current = 0
 
+/* 
+imageText.innerHTML = currentSlide.tagLine // <p>du texte dedans</p> TOUT
+imageText.textContent = currentSlide.tagLine // <p>SEUELEMENT LE TEXTE</p>
+*/
+
 function slideNext() {
+  bulletPoints[current].classList.remove('dot_selected') //enlève la classe selected avant de modifier current
   if (current < nbSlide - 1) {
     current++
   } else {
     current = 0
   }
-  let changeImage = slides[current]
-  image.setAttribute('src', 'assets/images/slideshow/' + changeImage.image)
+  bulletPoints[current].classList.add('dot_selected') // Une fois current modifié, on attribue la classe dot_selected au nouveau bullet point
+  let currentSlide = slides[current]
+  image.setAttribute('src', 'assets/images/slideshow/' + currentSlide.image)
+  imageText.innerHTML = currentSlide.tagLine // Modifie le texte
 }
 
 goNextbtn.addEventListener('click', slideNext)
 
 function slideBack() {
+  bulletPoints[current].classList.remove('dot_selected')
   if (current > 0) {
     current--
   } else {
     current = nbSlide - 1
   }
-  let changeImage = slides[current]
-  image.setAttribute('src', 'assets/images/slideshow/' + changeImage.image)
+  bulletPoints[current].classList.add('dot_selected')
+  let currentSlide = slides[current]
+  image.setAttribute('src', 'assets/images/slideshow/' + currentSlide.image)
+  imageText.innerHTML = currentSlide.tagLine
 }
 
 goBackbtn.addEventListener('click', slideBack)
